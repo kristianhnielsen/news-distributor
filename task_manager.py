@@ -7,8 +7,6 @@ import vault
 import os
 
 
- 
-
 def run():
     vault.update()
     tasks = create_tasks_from(import_from_json('tasks.json'))

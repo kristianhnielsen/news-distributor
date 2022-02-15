@@ -34,6 +34,8 @@ def update():
     # below parameters will yield approx. 1-2 weeks of articles on avg.
     # lowest: The Standard - 1-4 days
     # highest: Global Times - potentially 1+ month 
+
+
     add_to_vault_and_error_log(API.scmp.get(topic_url='defence', get_china_news=True, get_hk_news=True), media_list)
     add_to_vault_and_error_log(API.xinhua.get(number_of_pages_to_check=1), media_list)
     add_to_vault_and_error_log(API.global_times.get(), media_list)
