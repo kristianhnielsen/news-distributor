@@ -1,5 +1,6 @@
 import logging
 import smtplib
+import ssl
 import mimetypes
 from email.message import EmailMessage
 import datetime
@@ -27,8 +28,18 @@ def send_email(sender_adress: str, sender_password: str, recipient: str, attachm
         except FileNotFoundError:
             logging.critical(f'ERROR! Could not find the type of {attachment_file}. The file was skipped.')
             continue
-    mail_server = smtplib.SMTP_SSL('smtp.gmail.com')
-    mail_server.login(user=sender_adress, password=sender_password)
-    mail_server.send_message(message)
-    print(f'E-mail successfully sent to {recipient}')
-    mail_server.quit()
+    
+    SSL_context = ssl.create_default_context()
+    port = 587  
+    smtp_server = "smtp-mail.outlook.com"
+
+    server = smtplib.SMTP(smtp_server, port)
+
+    server.starttls(context=SSL_context)
+
+    server.login(sender_adress, sender_password)
+
+    server.send_message(message)
+    server.quit()
+    
+    print(f'E-mail with the subject {message["Subject"]} was successfully sent to {recipient}')
