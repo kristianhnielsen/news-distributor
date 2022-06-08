@@ -67,7 +67,6 @@ def find_publishing_date(session_get_response):
     for meta_element in session_get_response.html.find('meta'):
         try:
             if meta_element.attrs['name'] == 'publishdate':
-                print(meta_element.attrs['content'])
                 return meta_element.attrs['content']
         except KeyError:
             # meta element does not have the "name" attribute
