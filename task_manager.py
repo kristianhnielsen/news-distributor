@@ -95,13 +95,12 @@ class Task:
                             recipient=self.email_recipient,
                             email_body=email_settings['default_body'])
         elif type(self.email_recipient) is list:
-            for email_address in self.email_recipient:
                 email_client.send_email(
                                 sender_adress=email_settings['email_address'], 
                                 sender_password=email_settings['email_password'], 
                                 attachment_files=[self.filename], 
                                 email_subject=self.email_subject, 
-                                recipient=email_address,
+                                recipient=self.email_recipient,
                                 email_body=email_settings['default_body'])   
 
         vault.commit_custom_runtime_date(self.runtime_filename)
