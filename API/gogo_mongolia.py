@@ -342,7 +342,7 @@ class GogoMongolia(Source):
                 if re.search(r'\d{4}-\d{2}-\d{2}', element.attrs['content']) != None:
                     date, _ = element.attrs['content'].split('T')
                     return date 
-            except KeyError:
+            except (KeyError, ValueError):
                 continue
         
         return None
